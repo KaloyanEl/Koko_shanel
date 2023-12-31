@@ -20,14 +20,14 @@ public class Application {
 }
 
 
-class Book {
+class Product {
     private String title;
-    private String author;
+    private String seller;
     private ImageIcon coverImage;
 
-    public Book(String title, String author, ImageIcon coverImage) {
+    public Product(String title, String author, ImageIcon coverImage) {
         this.title = title;
-        this.author = author;
+        this.seller = seller;
         this.coverImage = coverImage;
     }
 
@@ -36,10 +36,10 @@ class Book {
 
 
 class GUI extends JFrame {
-    private List<Book> books = new ArrayList<>();  
-    private JTextField titleField, authorField;
+    private List<Product> books = new ArrayList<>();  
+    private JTextField titleField, ownerField;
     private JLabel imageLabel;
-    private ImageIcon bookImage;  
+    private ImageIcon productImage;  
 
     public GUI() {
         createUI();  
@@ -66,7 +66,7 @@ class GUI extends JFrame {
         JButton saveButton = new JButton("Save Item");
         imageLabel = new JLabel();
 
-        add(new JLabel("Heading:"));
+        add(new JLabel("Title:"));
         add(titleField);
         add(new JLabel("Description:"));
         add(authorField);
@@ -77,16 +77,16 @@ class GUI extends JFrame {
       
         uploadButton.addActionListener(e -> uploadImage());
         
-        saveButton.addActionListener(e -> saveBook());
+        saveButton.addActionListener(e -> saveProduct());
     }
 
     private void uploadImage() {
        
     }
 
-    private void saveBook() {
-        Book book = new Book(titleField.getText(), authorField.getText(), bookImage);
-        books.add(book);  
+    private void saveProduct() {
+        Product product = new Product(titleField.getText(), ownerField.getText(), productImage);
+        product.product(book);  
         JOptionPane.showMessageDialog(this, "Item Saved!");
     }
 }
