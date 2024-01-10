@@ -14,7 +14,7 @@ public class ProductDisplayPanel extends JPanel {
         productPanel.setLayout(new BoxLayout(productPanel, BoxLayout.Y_AXIS));
         productPanel.add(new JLabel(product.getName()));
         productPanel.add(new JLabel(product.getDescription()));
-        // In a real application, we should scale the image accordingly
+      
        
     }
 }
