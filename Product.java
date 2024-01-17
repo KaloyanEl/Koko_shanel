@@ -12,7 +12,28 @@ public class Product {
     }
 
     // Getters
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public ImageIcon getImage() { return image; }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ImageIcon getImage() {
+        return image;
+    }
+
+    public void setImage(ImageIcon image) {
+        this.image = image;
+    }
 }

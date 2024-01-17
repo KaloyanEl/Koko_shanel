@@ -6,7 +6,7 @@ public class LoginPanel extends JPanel {
     public LoginPanel(JFrame frame, CardLayout cardLayout, JPanel cards) {
         setLayout(null);
         setSize(800, 150);
-
+        setBackground(Color.MAGENTA.darker());
 
         JTextField emailField = new JTextField();
 //        emailField.setPreferredSize(new Dimension(200, 30));
@@ -30,4 +30,6 @@ public class LoginPanel extends JPanel {
 
         loginButton.addActionListener(e -> cardLayout.show(cards, "ProductCreationPanel"));
     }
+
+
 }
