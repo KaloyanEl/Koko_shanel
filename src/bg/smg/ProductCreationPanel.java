@@ -14,27 +14,41 @@ public class ProductCreationPanel extends JPanel {
 
 
     JTextField productNameField = new JTextField();
-    JTextField productDescription = new JTextField();
+    JTextArea productDescription = new JTextArea();
     JButton uploadButton = new JButton("Upload Image");
     JButton saveButton = new JButton("Save");
-    JLabel nameProduct = new JLabel("Name of the product:");
+    JButton nextButton = new JButton("Next"); // Added based on the wireframe
+    JLabel nameProduct = new JLabel("Product Name:");
     JLabel description = new JLabel("Description:");
+    JLabel priceLabel = new JLabel("Price:"); // Added based on the wireframe
+    JTextField productPriceField = new JTextField(); // Added based on the wireframe
     JLabel productImg = new JLabel();
     JLabel productImgName = new JLabel();
-
     public ProductCreationPanel(JFrame frame, CardLayout cardLayout, JPanel cards, List<Product> productList) {
         setLayout(null);
         setSize(800, 150);
         setBackground(Color.MAGENTA.darker());
 
 
+        // Labels
+        nameProduct.setBounds(270, 10, 200, 30);
+        productNameField.setBounds(270, 40, 280, 30);
+        description.setBounds(270, 80, 200, 30);
 
-        nameProduct.setBounds(20, 0, 200, 40);
-        description.setBounds(20, 50, 120, 40);
-        uploadButton.setBounds(100, 170, 200, 40);
-        saveButton.setBounds(100, 220, 100, 40);
-        productDescription.setBounds(200, 0, 400, 40);
-        productNameField.setBounds(200, 50, 400, 100);
+
+        productDescription.setBounds(270, 110, 280, 90);
+        productDescription.setLineWrap(true);
+        productDescription.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(productDescription); // To add scroll bars to the text area
+
+        scrollPane.setBounds(270, 110, 280, 90);
+
+        priceLabel.setBounds(270, 210, 200, 30);
+        productPriceField.setBounds(270, 240, 280, 30);
+
+        uploadButton.setBounds(270, 280, 280, 30);
+        saveButton.setBounds(270, 320, 135, 30);
+        nextButton.setBounds(415, 320, 135, 30);
 
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -58,10 +72,12 @@ public class ProductCreationPanel extends JPanel {
         add(nameProduct);
         add(productNameField);
         add(description);
-        add(productDescription);
+        add(scrollPane); // Add the scroll pane instead of the text area directly
+        add(priceLabel);
+        add(productPriceField);
         add(uploadButton);
         add(saveButton);
-        add(productImgName);
+        add(nextButton);
        // add(productImg);
     }
 
@@ -114,4 +130,5 @@ public class ProductCreationPanel extends JPanel {
         }
     }
 }
+
 
