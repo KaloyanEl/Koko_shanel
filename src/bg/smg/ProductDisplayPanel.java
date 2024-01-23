@@ -3,6 +3,8 @@ package bg.smg;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,10 +16,12 @@ public class ProductDisplayPanel extends JPanel {
     private JTextField searchField;
     JLabel shopTitle = new JLabel("KOKO SHOP", SwingConstants.CENTER);
     JTextArea descriptionArea = new JTextArea("");
+    JButton uploadbutton;
     JPanel gridPanel = new JPanel();
 
-    public ProductDisplayPanel(List<Product> productList) {
+    public ProductDisplayPanel(CardLayout cardLayout, JPanel cards,List<Product> productList) {
         searchField = new JTextField();
+        uploadbutton= new JButton("Upload Item");
 
         Path resourceDirectory = Paths.get("resources");
         absolutePath = resourceDirectory.toFile().getAbsolutePath();
@@ -25,8 +29,17 @@ public class ProductDisplayPanel extends JPanel {
         setBackground(Color.WHITE);
 
         // Search bar at the top
-        searchField.setBounds(20, 20, 760, 30);
+        searchField.setBounds(20, 20, 500, 30);
+        uploadbutton.setBounds(550, 20 , 200, 50);
         add(searchField);
+        add(uploadbutton);
+        uploadbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cards, "ProductCreationPanel");
+            }
+            }
+        );
 
         // Shop title
         shopTitle.setBounds(20, 60, 760, 40);

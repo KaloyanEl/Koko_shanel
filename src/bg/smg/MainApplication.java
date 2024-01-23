@@ -62,7 +62,7 @@ public class MainApplication extends JFrame {
 
         JPanel loginPanel = new LoginPanel(this, cardLayout, cards);
         JPanel productCreationPanel = new ProductCreationPanel(this, cardLayout, cards, productList);
-        JPanel productDisplayPanel = new ProductDisplayPanel(productList);
+        JPanel productDisplayPanel = new ProductDisplayPanel(cardLayout, cards, productList);
 
         cards.add(loginPanel, "LoginPanel");
         cards.add(productCreationPanel, "ProductCreationPanel");
