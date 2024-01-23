@@ -32,12 +32,12 @@ public class ProductDisplayPanel extends JPanel {
         descriptionArea.setEditable(false);
         add(descriptionArea);
 
-        // Grid for product placeholders
+        
         gridPanel.setLayout(new GridLayout(2, 4, 10, 10));
         gridPanel.setBounds(20, 160, 760, 300);
         add(gridPanel);
 
-        // Adding placeholders to grid
+        
         for (int i = 0; i < 8; i++) {
             JPanel productPanel = new JPanel(new BorderLayout(5, 5));
             JLabel imagePlaceholder = new JLabel(" ", SwingConstants.CENTER);
