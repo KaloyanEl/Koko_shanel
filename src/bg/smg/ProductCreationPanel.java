@@ -40,6 +40,11 @@ public class ProductCreationPanel extends JPanel {
 
 
         productNameField.setBounds(270, 140, 300, 40);
+      //  productNameField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+        Border SeacrchBorder = new LineBorder(Color.BLUE, 5, true); // Create a bold border
+        productNameField.setBorder(SeacrchBorder);
+
 
 
         description.setFont(new Font("Arial", Font.BOLD, 25));
@@ -48,7 +53,7 @@ public class ProductCreationPanel extends JPanel {
 
 
         productDescription.setBounds(270, 210, 400, 90);
-        productDescription.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+      //  productDescription.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
         Border seacrchBorder = new LineBorder(Color.BLUE, 5, true); // Create a bold border
         productDescription.setBorder(seacrchBorder);
@@ -65,7 +70,8 @@ public class ProductCreationPanel extends JPanel {
         priceLabel.setBounds(270, 310, 200, 30);
 
         productPriceField.setBounds(270, 340, 280, 30);
-
+        Border SeacrchBorder1 = new LineBorder(Color.BLUE, 5, true); // Create a bold border
+        productPriceField.setBorder(SeacrchBorder1);
         uploadButton.setBounds(270, 380, 280, 30);
         uploadButton.setBackground(new Color(0, 0, 255));
         uploadButton.setForeground(Color.WHITE);
