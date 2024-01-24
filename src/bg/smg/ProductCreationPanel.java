@@ -19,7 +19,7 @@ public class ProductCreationPanel extends JPanel {
     JTextArea productDescription = new JTextArea();
     JButton uploadButton = new JButton("Upload Image");
     JButton saveButton = new JButton("Save");
-    JButton nextButton = new JButton("Next"); // Added based on the wireframe
+    JButton PreviousButton = new JButton("Previous"); // Added based on the wireframe
     JLabel nameProduct = new JLabel("Product Name:");
     JLabel description = new JLabel("Description:");
     JLabel priceLabel = new JLabel("Price:"); // Added based on the wireframe
@@ -84,7 +84,7 @@ public class ProductCreationPanel extends JPanel {
 
 
         saveButton.setBounds(270, 420, 135, 30);
-        nextButton.setBounds(415, 420, 135, 30);
+        PreviousButton.setBounds(415, 420, 135, 30);
 
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -104,8 +104,14 @@ public class ProductCreationPanel extends JPanel {
                 handleFileUpload();
             }
         });
+        PreviousButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cards, "ProductDisplayPanel");
+            }
+        });
 
-        add(nameProduct);
+                add(nameProduct);
         add(productNameField);
         add(description);
         add(scrollPane); // Add the scroll pane instead of the text area directly
@@ -113,7 +119,7 @@ public class ProductCreationPanel extends JPanel {
         add(productPriceField);
         add(uploadButton);
         add(saveButton);
-        add(nextButton);
+        add(PreviousButton);
        // add(productImg);
     }
 
