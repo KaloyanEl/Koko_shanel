@@ -1,6 +1,7 @@
 package bg.smg;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import javax.swing.border.Border;
 
 public class ProductCreationPanel extends JPanel {
 
@@ -27,28 +29,56 @@ public class ProductCreationPanel extends JPanel {
     public ProductCreationPanel(JFrame frame, CardLayout cardLayout, JPanel cards, List<Product> productList) {
         setLayout(null);
         setSize(800, 150);
-        setBackground(Color.MAGENTA.darker());
+        setBackground(Color.ORANGE);
 
 
         // Labels
-        nameProduct.setBounds(270, 10, 200, 30);
-        productNameField.setBounds(270, 40, 280, 30);
-        description.setBounds(270, 80, 200, 30);
+
+        nameProduct.setFont(new Font("Arial", Font.BOLD, 25));
+        nameProduct.setForeground(new Color(0, 0, 255));
+        nameProduct.setBounds(270, 110, 200, 30);
 
 
-        productDescription.setBounds(270, 110, 280, 90);
+        productNameField.setBounds(270, 140, 300, 40);
+
+
+        description.setFont(new Font("Arial", Font.BOLD, 25));
+        description.setForeground(new Color(0, 0, 255));
+        description.setBounds(270, 180, 200, 30);
+
+
+        productDescription.setBounds(270, 210, 400, 90);
+        productDescription.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+        Border seacrchBorder = new LineBorder(Color.BLUE, 5, true); // Create a bold border
+        productDescription.setBorder(seacrchBorder);
         productDescription.setLineWrap(true);
         productDescription.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(productDescription); // To add scroll bars to the text area
 
-        scrollPane.setBounds(270, 110, 280, 90);
+        scrollPane.setBounds(270, 210, 280, 90);
 
-        priceLabel.setBounds(270, 210, 200, 30);
-        productPriceField.setBounds(270, 240, 280, 30);
 
-        uploadButton.setBounds(270, 280, 280, 30);
-        saveButton.setBounds(270, 320, 135, 30);
-        nextButton.setBounds(415, 320, 135, 30);
+
+        priceLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        priceLabel.setForeground(new Color(0, 0, 255));
+        priceLabel.setBounds(270, 310, 200, 30);
+
+        productPriceField.setBounds(270, 340, 280, 30);
+
+        uploadButton.setBounds(270, 380, 280, 30);
+        uploadButton.setBackground(new Color(0, 0, 255));
+        uploadButton.setForeground(Color.WHITE);
+        uploadButton.setFont(new Font("Arial", Font.BOLD, 20));
+        uploadButton.setBorder(new LineBorder(Color.BLUE));
+        //uploadButton.setBorder(new RoundedBorder(10));
+        uploadButton.setFocusPainted(false);
+        uploadButton.setOpaque(true);
+        uploadButton.setBorderPainted(true);
+
+
+        saveButton.setBounds(270, 420, 135, 30);
+        nextButton.setBounds(415, 420, 135, 30);
 
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -94,7 +124,9 @@ public class ProductCreationPanel extends JPanel {
 
         // Write formatted output to the file
         output.print(productNameField.getText());
+        output.print(" ");
         output.print(productDescription.getText());
+        output.print(" ");
         output.print(productImgName.getText());
         // Close the file
         output.close();
@@ -130,6 +162,8 @@ public class ProductCreationPanel extends JPanel {
         }
     }
 }
+
+
 
 
 
