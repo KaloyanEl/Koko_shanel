@@ -1,6 +1,8 @@
 package bg.smg;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +12,21 @@ public class LoginPanel extends JPanel {
     public LoginPanel(JFrame frame, CardLayout cardLayout, JPanel cards) {
         setLayout(null);
         setSize(800, 150);
-        setBackground(Color.red);
+        setBackground(Color.ORANGE);
+
+
+        JPanel productPanel = new JPanel(new BorderLayout(5, 5));
+        ImageIcon imgIcon = new ImageIcon("bg/smg/logo.png");
+        JLabel imagePlaceholder = new JLabel(imgIcon, SwingConstants.CENTER);
+        imagePlaceholder.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JLabel title = new JLabel("Welcome in KOKO SHANEL");
+
+        //  imagePlaceholder.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+       ;
+
+
+
+
 
         JTextField emailField = new JTextField();
 
@@ -21,24 +37,51 @@ public class LoginPanel extends JPanel {
         JLabel emailLbl = new JLabel("Email:");
         JLabel pswLbl = new JLabel("Password:");
 
-        emailLbl.setBounds(170,50,80,40);
-        emailLbl.setFont(new Font("Verdana", Font.BOLD, 15));
 
 
-        emailField.setBounds(290,50,200,40);
+        title.setBounds(140, 60, 760, 40);
+        title.setFont(new Font("Arial", Font.BOLD, 40));
+        title.setForeground(new Color(0, 0, 255));
+        add(title);
 
-        pswLbl.setBounds(170,100,100,40);
-        pswLbl.setFont(new Font("Verdana", Font.BOLD, 15));
+        emailLbl.setBounds(170,150,100,40);
+        emailLbl.setFont(new Font("Verdana", Font.BOLD, 17));
 
-        passwordField.setBounds(290,100,200,40);
 
-        loginButton.setBounds(320,180,100,40);
+        emailField.setBounds(340,150,200,40);
+
+        pswLbl.setBounds(170,200,100,40);
+        pswLbl.setFont(new Font("Verdana", Font.BOLD, 17));
+
+        passwordField.setBounds(340,200,200,40);
+
+        loginButton.setBounds(320,280,150,60);
+
+
+        loginButton.setBackground(new Color(0, 0, 255));
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setFont(new Font("Arial", Font.BOLD, 20));
+        loginButton.setBorder(new LineBorder(Color.BLUE));
+        loginButton.setFocusPainted(false);
+        loginButton.setOpaque(true);
+        loginButton.setBorderPainted(true);
+
 
         add(emailLbl);
         add(emailField);
         add(pswLbl);
         add(passwordField);
         add(loginButton);
+        //add(imagePlaceholder);
+
+
+        emailField.setFont(new Font("Serif", Font.BOLD, 16)); // Set an interesting font and make it bold
+        Border textFieldBorder = new LineBorder(Color.BLUE, 2, true); // Create a bold border
+        emailField.setBorder(textFieldBorder);
+
+        passwordField.setFont(new Font("Serif", Font.BOLD, 16)); // Set an interesting font and make it bold
+        Border passwordFieldBorder = new LineBorder(Color.BLUE, 2, true); // Create a bold border
+        passwordField.setBorder(passwordFieldBorder);
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
