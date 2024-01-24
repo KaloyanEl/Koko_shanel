@@ -21,14 +21,15 @@ public class ProductDisplayPanel extends JPanel {
     JTextArea descriptionArea = new JTextArea("");
     JButton uploadbutton;
     JPanel gridPanel = new JPanel();
-
+    JButton searchbutton;
     public ProductDisplayPanel(CardLayout cardLayout, JPanel cards,List<Product> productList) {
 
 
 
-        searchField = new JTextField("Searching for .....");
-        uploadbutton= new JButton("Upload Item");
+        searchField = new JTextField();
 
+        uploadbutton= new JButton("Upload Item");
+        searchbutton= new JButton("Search:");
         Path resourceDirectory = Paths.get("resources");
         absolutePath = resourceDirectory.toFile().getAbsolutePath();
         setLayout(null);
@@ -50,10 +51,12 @@ public class ProductDisplayPanel extends JPanel {
         searchField.setBackground(Color.ORANGE);
         Border seacrchBorder = new LineBorder(Color.BLUE, 5, true); // Create a bold border
         searchField.setBorder(seacrchBorder);
-        searchField.setBounds(20, 20, 500, 30);
-
-        uploadbutton.setBounds(550, 20 , 200, 50);
+        searchField.setBounds(100, 20, 400, 30);
         add(searchField);
+
+        searchbutton.setBounds(10,20,80,30);
+        add(searchbutton);
+        uploadbutton.setBounds(550, 20 , 200, 50);
         add(uploadbutton);
 
         uploadbutton.addActionListener(new ActionListener() {
