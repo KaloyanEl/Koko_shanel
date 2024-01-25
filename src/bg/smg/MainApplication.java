@@ -40,7 +40,9 @@ public class MainApplication extends JFrame {
             String name = input.next();
             String description = input.next();
             String image = input.next();
-            Product p = new Product(name, description, image);
+            String price = input.next();
+
+            Product p = new Product(name, description, image, price);
             products.add(p);
         }
 

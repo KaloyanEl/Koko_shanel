@@ -9,14 +9,16 @@ import java.io.*;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.border.Border;
 
 public class ProductCreationPanel extends JPanel {
 
 
     JTextField productNameField = new JTextField();
-    JTextArea productDescription = new JTextArea();
+    JTextField productDescription = new JTextField();
     JButton uploadButton = new JButton("Upload Image");
     JButton saveButton = new JButton("Save");
     JButton PreviousButton = new JButton("Previous"); // Added based on the wireframe
@@ -26,12 +28,17 @@ public class ProductCreationPanel extends JPanel {
     JTextField productPriceField = new JTextField(); // Added based on the wireframe
     JLabel productImg = new JLabel();
     JLabel productImgName = new JLabel();
+
+    JLabel Heading = new JLabel("Create Product");
     public ProductCreationPanel(JFrame frame, CardLayout cardLayout, JPanel cards, List<Product> productList) {
         setLayout(null);
         setSize(800, 150);
         setBackground(Color.ORANGE);
 
 
+
+        Heading.setBounds(250, 10, 600, 100);
+        Heading.setFont(new Font("Arial", Font.BOLD, 60));
         // Labels
 
         nameProduct.setFont(new Font("Arial", Font.BOLD, 25));
@@ -39,7 +46,7 @@ public class ProductCreationPanel extends JPanel {
         nameProduct.setBounds(270, 110, 200, 30);
 
 
-        productNameField.setBounds(270, 140, 300, 40);
+        productNameField.setBounds(270, 140, 400, 40);
       //  productNameField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
         Border SeacrchBorder = new LineBorder(Color.BLUE, 5, true); // Create a bold border
@@ -53,15 +60,11 @@ public class ProductCreationPanel extends JPanel {
 
 
         productDescription.setBounds(270, 210, 400, 90);
-      //  productDescription.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        Border DescriptionFiledBorder= new LineBorder(Color.BLUE, 5, true); // Create a bold border
+        productDescription.setBorder(DescriptionFiledBorder);
 
-        Border seacrchBorder = new LineBorder(Color.BLUE, 5, true); // Create a bold border
-        productDescription.setBorder(seacrchBorder);
-        productDescription.setLineWrap(true);
-        productDescription.setWrapStyleWord(true);
-        JScrollPane scrollPane = new JScrollPane(productDescription); // To add scroll bars to the text area
 
-        scrollPane.setBounds(270, 210, 280, 90);
+
 
 
 
@@ -69,9 +72,11 @@ public class ProductCreationPanel extends JPanel {
         priceLabel.setForeground(new Color(0, 0, 255));
         priceLabel.setBounds(270, 310, 200, 30);
 
-        productPriceField.setBounds(270, 340, 280, 30);
+        productPriceField.setBounds(270, 340, 100, 30);
         Border SeacrchBorder1 = new LineBorder(Color.BLUE, 5, true); // Create a bold border
         productPriceField.setBorder(SeacrchBorder1);
+
+
         uploadButton.setBounds(270, 380, 280, 30);
         uploadButton.setBackground(new Color(0, 0, 255));
         uploadButton.setForeground(Color.WHITE);
@@ -83,20 +88,29 @@ public class ProductCreationPanel extends JPanel {
         uploadButton.setBorderPainted(true);
 
 
-        saveButton.setBounds(270, 420, 135, 30);
-        PreviousButton.setBounds(415, 420, 135, 30);
+
+        PreviousButton.setBounds(415, 480, 135, 30);
+        PreviousButton.setBackground(Color.BLUE);
+        PreviousButton.setForeground(Color.WHITE);
+        PreviousButton.setFont(new Font("Arial", Font.BOLD, 14));
+
+
+
+        saveButton.setBounds(270, 480, 135, 30);
+        saveButton.setBackground(Color.GREEN);
+        saveButton.setForeground(Color.WHITE);
+        saveButton.setFont(new Font("Arial", Font.BOLD, 14));
 
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     save(productList);
-                } catch (FileNotFoundException ex) {
+                } catch (IOException ex) { // Catch IOException instead of FileNotFoundException
                     ex.printStackTrace();
                 }
             }
         });
-
 
         uploadButton.addActionListener(new ActionListener() {
             @Override
@@ -107,42 +121,41 @@ public class ProductCreationPanel extends JPanel {
         PreviousButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (cards.getComponent(1) instanceof ProductDisplayPanel) {
+                    ((ProductDisplayPanel) cards.getComponent(1)).loadProductsFromFile(productList);
+                }
                 cardLayout.show(cards, "ProductDisplayPanel");
             }
         });
 
-                add(nameProduct);
+        add(nameProduct);
         add(productNameField);
+        add(productDescription);
         add(description);
-        add(scrollPane); // Add the scroll pane instead of the text area directly
         add(priceLabel);
         add(productPriceField);
         add(uploadButton);
         add(saveButton);
         add(PreviousButton);
+        add(Heading);
        // add(productImg);
     }
 
-    public void save(List<Product> productList) throws FileNotFoundException {
-       Product p = new Product(productNameField.getText(),productDescription.getText(), productImgName.getText());
+    // In ProductCreationPanel class
+    public void save(List<Product> productList) throws IOException {
+        Product p = new Product(productNameField.getText(), productDescription.getText(), productImgName.getText(),productPriceField.getText());
+        productList.add(p); // Add to in-memory list
 
-        //add to list
-        productList.add(p);
-        //add to file
-        File file = new File("products.txt");
-
-        // Create a file
-        PrintWriter output = new PrintWriter(file);
-
-        // Write formatted output to the file
-        output.print(productNameField.getText());
-        output.print(" ");
-        output.print(productDescription.getText());
-        output.print(" ");
-        output.print(productImgName.getText());
-        // Close the file
-        output.close();
+        // Append to file
+        try (FileWriter fw = new FileWriter("products.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(productNameField.getText() + " " + productDescription.getText() + " " + productImgName.getText() + " " + productPriceField.getText());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     private void handleFileUpload() {
 
@@ -152,9 +165,9 @@ public class ProductCreationPanel extends JPanel {
         int option = fileChooser.showOpenDialog(this);
         if(option == JFileChooser.APPROVE_OPTION){
             File file = fileChooser.getSelectedFile();
-            productImgName.setText("File Selected: " + file.getName());
+            productImgName.setText(file.getName());
             try {
-                Path resourceDirectory = Paths.get("src", "resources");
+                Path resourceDirectory = Paths.get("resources");
                 String absolutePath = resourceDirectory.toFile().getAbsolutePath();
 
                 FileChannel src = new FileInputStream(file).getChannel();
@@ -173,6 +186,7 @@ public class ProductCreationPanel extends JPanel {
 
         }
     }
+
 }
 
 
